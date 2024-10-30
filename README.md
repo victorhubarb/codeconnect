@@ -41,3 +41,4 @@ With basic upload management, the **CodeConnect** page allows users to upload fi
 
 ## Contributors
 - [Victor Barbosa](https://github.com/victorhubarb)
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
