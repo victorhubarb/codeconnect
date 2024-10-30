@@ -31,7 +31,9 @@
 With basic upload management, the **CodeConnect** page allows users to upload files directly through the interface.
 
 ## Features
-- **File Upload Interface**: Allows users to upload files easily.
+- **Image Upload**: Upload images directly through the interface.
+- **Detailed Fields**: Add a name, description, and tags for each image.
+- **Discard Button**: Erase all the information you filled in to restart the process.
 - **Responsive Design**: Compatible with different devices and screen sizes.
 
 ## Technologies
