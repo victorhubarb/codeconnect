@@ -1,81 +1,43 @@
-# CodeConnect 💻
+# CodeConnect
 
-![Status](https://img.shields.io/badge/status-completed-green?style=for-the-badge)
-![JavaScript](https://img.shields.io/badge/HTML5%20%2B%20CSS3%20%2B%20JavaScript-Frontend-yellow?style=for-the-badge)
+A project-publishing form for developers, in plain HTML, CSS and JavaScript. You pick a cover image, add tags, and "publish". The image preview works in the browser, and the tag check and the publish step are simulated with Promises, so the page has no backend.
 
-A developer project upload interface built with HTML, CSS, and JavaScript — with image preview via FileReader API, async tag validation, and simulated project publishing using Promises and async/await.
+**Live demo:** [codeconnect-two.vercel.app](https://codeconnect-two.vercel.app)
 
----
+## What it does
 
-## Live Application
+- **Image preview.** Choosing a file shows it immediately. `lerConteudoDoArquivo()` wraps `FileReader` in a Promise and resolves with the image as a data URL plus its file name.
+- **Tags.** Type a tag and press Enter. After a one-second fake delay (`setTimeout` inside a Promise), the tag is accepted only if it is on the allowed list: Front-end, Programação, Data Science, Full-stack, HTML, CSS or JavaScript. An unknown tag gets an alert. Clicking the X on a tag removes it, using one click listener on the parent `<ul>` instead of one per tag (event delegation).
+- **Publish.** Waits two seconds, then succeeds or fails at random (`Math.random() > 0.5`). The handler uses `async/await` with `try/catch` for both outcomes.
+- **Discard.** Resets the form, puts the placeholder image back and clears the tags.
 
-[CodeConnect Demonstration](https://codeconnect-two.vercel.app)
+The interface is in Portuguese. The styles use CSS custom properties for the dark theme and the Prompt font from Google Fonts.
 
----
+## Run it
 
-## Overview
-
-CodeConnect is a project publishing interface for developers. Users can upload an image (previewed instantly in the browser without a server), fill in the project name and description, add tags from a predefined list, and publish. Every async operation — image reading, tag validation, and publishing — uses Promises and async/await, making the code easy to follow and extend.
-
----
-
-## Architecture
-
-```
-codeconnect/
-├── index.html          # Page structure — aside nav + main form
-├── styles.css          # All styles — CSS custom properties, dark theme, Flexbox layout
-├── scripts.js          # All interactivity — FileReader, Promises, async/await, event delegation
-└── img/                # SVG icons and placeholder image
-```
-
-### Key JavaScript Concepts Applied
-
-| Concept | How it shows up |
-|---|---|
-| **FileReader API** | `lerConteudoDoArquivo()` wraps `FileReader` in a Promise — reads the image and returns a base64 URL for preview |
-| **Promises** | `lerConteudoDoArquivo()`, `verificaTagsDisponiveis()`, and `publicarProjeto()` all return Promises |
-| **async/await** | All event handlers that call async functions use `await` inside `try/catch` blocks |
-| **Event delegation** | Tag removal uses a single listener on the parent `ul` — checks `classList.contains("remove-tag")` instead of attaching to each tag |
-| **DOM manipulation** | Tags are created with `document.createElement("li")` and appended dynamically |
-| **setTimeout simulation** | Tag validation and publishing simulate async API calls with `setTimeout` |
-| **Form reset** | Discard button resets the form, restores the placeholder image, and clears all tags |
-| **CSS Custom Properties** | Dark theme managed via `:root` — `--background-color`, `--primary-color`, `--tag-color` |
-| **Google Fonts** | Prompt font family with multiple weights |
-
----
-
-## Features
-
-- **Image Upload** — click to select an image; preview appears instantly using FileReader API
-- **Tag System** — type a tag and press Enter; validated against a predefined list with a 1s simulated delay
-- **Remove Tags** — click the X on any tag to remove it via event delegation
-- **Publish** — simulates an API call with random success/failure after 2 seconds
-- **Discard** — resets the entire form, image, and tag list in one click
-
----
-
-## How to Run
+No build step. Clone the repo and open `index.html` in a browser.
 
 ```bash
 git clone https://github.com/victorhubarb/codeconnect.git
 cd codeconnect
 ```
 
-Open `index.html` in your browser. No build step needed.
+## Project structure
+
+```
+index.html    Sidebar and the form
+styles.css    Dark theme, Flexbox layout
+scripts.js    All behavior
+img/          SVG icons and the placeholder image
+```
+
+## Known gaps
+
+- Publishing is a simulation. The name, description and tags are collected but never sent anywhere.
+- The form has no validation, so you can publish an empty project.
+- Tag matching is case-sensitive, so "html" is rejected while "HTML" is accepted.
+- There are no media queries, so the layout is made for desktop screens.
 
 ---
 
-## Technologies
-
-- **HTML5 / CSS3 / JavaScript**
-- **FileReader API** — client-side image reading and preview
-- **Promises + async/await** — asynchronous flow control
-- **Google Fonts** — Prompt
-
----
-
-## Author
-
-**Victor Hugo Barbosa**
-[GitHub](https://github.com/victorhubarb) · [LinkedIn](https://www.linkedin.com/in/victorhbarbosa/)
+Victor Hugo Barbosa · [GitHub](https://github.com/victorhubarb) · [LinkedIn](https://www.linkedin.com/in/victorhbarbosa/)
